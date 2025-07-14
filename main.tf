@@ -41,3 +41,7 @@ module "ecs" {
 }
 
 
+variable "dbpassword" {
+  description = "Database password"
+  type        = string
+}
