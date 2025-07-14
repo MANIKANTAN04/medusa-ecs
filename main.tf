@@ -11,7 +11,6 @@ provider "aws" {
   region = "ap-south-1"
 }
 
-
 module "network" {
   source              = "./terraform/network"
   vpc_cidr            = var.vpc_cidr
@@ -33,13 +32,12 @@ module "alb" {
 module "ecs" {
   source             = "./terraform/ecs"
   db_username        = var.db_username
-  db_password        = var.db_password
+  db_password        = var.dbpassword
   vpc_id             = module.network.vpc_id
   public_subnet_id   = module.network.public_subnet_id
   ecs_sg_id          = module.security.ecs_sg_id
   target_group_arn   = module.alb.target_group_arn
 }
-
 
 variable "dbpassword" {
   description = "Database password"
